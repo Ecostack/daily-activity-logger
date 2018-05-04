@@ -1,34 +1,37 @@
-
 import {RouterHelper} from "./RouterHelper";
 import {User} from "../models/User";
+import * as mongoose from 'mongoose';
 
 export class UserRoute {
-	static create(router) {
-		router.get('/', RouterHelper.asyncMiddleware(async (req, res, next) => {
-			res.json(await User.find());
-		}));
+    static ROUTER_PREFIX = 'user';
 
-		/* GET SINGLE PRODUCT BY ID */
-		router.get('/:id', RouterHelper.asyncMiddleware(async (req, res, next) => {
-			res.json(await User.findById(req.params.id));
-		}));
+    static create(router) {
+        router.get(`/${UserRoute.ROUTER_PREFIX}/`, RouterHelper.asyncMiddleware(async (req, res, next) => {
+            res.json(await User.find());
+        }));
 
-		/* SAVE PRODUCT */
-		router.post('/', RouterHelper.asyncMiddleware(async (req, res, next) => {
-			res.json(await User.create(req.body));
+        /* GET SINGLE PRODUCT BY ID */
+        router.get(`/${UserRoute.ROUTER_PREFIX}/:id`, RouterHelper.asyncMiddleware(async (req, res, next) => {
+            res.json(await User.findById(mongoose.Types.ObjectId(
+                req.params.id)));
+        }));
 
-		}));
+        /* SAVE PRODUCT */
+        router.post(`/${UserRoute.ROUTER_PREFIX}/`, RouterHelper.asyncMiddleware(async (req, res, next) => {
+            res.json(await User.create(req.body));
 
-		/* UPDATE PRODUCT */
-		router.put('/:id', RouterHelper.asyncMiddleware(async (req, res, next) => {
-			res.json(await User.findByIdAndUpdate(req.params.id, req.body));
+        }));
 
-		}));
+        /* UPDATE PRODUCT */
+        router.put(`/${UserRoute.ROUTER_PREFIX}/:id`, RouterHelper.asyncMiddleware(async (req, res, next) => {
+            res.json(await User.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id), req.body));
 
-		/* DELETE PRODUCT */
-		router.delete('/:id', RouterHelper.asyncMiddleware(async (req, res, next) => {
-			res.json(User.findByIdAndRemove(req.params.id, req.body))
-		}));
+        }));
 
-	}
+        /* DELETE PRODUCT */
+        router.delete(`/${UserRoute.ROUTER_PREFIX}/:id`, RouterHelper.asyncMiddleware(async (req, res, next) => {
+            res.json(await User.findByIdAndRemove(mongoose.Types.ObjectId(req.params.id), req.body))
+        }));
+
+    }
 }
