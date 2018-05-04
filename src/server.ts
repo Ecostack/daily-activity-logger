@@ -1,6 +1,8 @@
 import * as express from 'express';
 import {UserRoute} from "./backend/routes/UserRoute";
 import * as mongoose from 'mongoose';
+import {NoteRoute} from "./backend/routes/NoteRoute";
+import {TaxonomyRoute} from "./backend/routes/TaxonomyRoute";
 
 export class Config {
     static mongo = {
@@ -37,6 +39,8 @@ export class Server {
     private static routes() {
         const router = express.Router();
         UserRoute.create(router);
+        NoteRoute.create(router);
+        TaxonomyRoute.create(router);
         this.server.use(`/api`, router);
     }
 }

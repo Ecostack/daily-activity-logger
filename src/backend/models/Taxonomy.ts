@@ -1,9 +1,7 @@
 import * as mongoose from 'mongoose';
 
 const TaxonomySchema = new mongoose.Schema({
-
-	email: String,
-	password: String,
+	user: String,
 	updated_at: { type: Date, default: Date.now },
 });
 
