@@ -1,0 +1,12 @@
+{
+  "presets": [
+      "react", 
+      [ "env", {
+        "targets": {
+          "uglify": true,
+          "browsers": ["defaults", "last 3 versions", "IE >= 10"]
+        },
+        "useBuiltIns": true
+    }]
+  ]
+}
