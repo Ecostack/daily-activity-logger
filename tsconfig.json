@@ -19,6 +19,7 @@
     "alwaysStrict": true,
     "noEmitOnError": true,
     "typeRoots": [
+      "node_modules/@types"
     ],
     "allowSyntheticDefaultImports": false,
     "esModuleInterop": false,

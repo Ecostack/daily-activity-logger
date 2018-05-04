@@ -10,7 +10,9 @@
   "author": "Lars Douwe Schuitema <info@larsschuitema.nl>",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^10.0.3",
     "express": "^4.16.3",
+    "mongoose": "^5.0.17",
     "pug": "^2.0.3",
     "react": "^16.3.2",
     "react-dom": "^16.3.2"
