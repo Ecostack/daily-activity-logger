@@ -21,7 +21,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'index.html',
-      template: 'views/index.pug',
+      template: 'src/client/index.pug',
     }),
   ],
   externals: {
