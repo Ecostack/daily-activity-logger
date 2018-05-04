@@ -3,7 +3,7 @@ import {Taxonomy} from "../models/Taxonomy";
 import * as mongoose from 'mongoose';
 
 export class TaxonomyRoute {
-    static ROUTER_PREFIX = 'note';
+    static ROUTER_PREFIX = 'taxonomy';
 
     static create(router) {
         router.get(`/${TaxonomyRoute.ROUTER_PREFIX}/`, RouterHelper.asyncMiddleware(async (req, res, next) => {
