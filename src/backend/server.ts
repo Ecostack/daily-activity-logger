@@ -1,8 +1,8 @@
 import * as express from 'express';
-import {UserRoute} from "./backend/routes/UserRoute";
+import {UserRoute} from "./routes/UserRoute";
 import * as mongoose from 'mongoose';
-import {NoteRoute} from "./backend/routes/NoteRoute";
-import {TaxonomyRoute} from "./backend/routes/TaxonomyRoute";
+import {NoteRoute} from "./routes/NoteRoute";
+import {TaxonomyRoute} from "./routes/TaxonomyRoute";
 import * as path from 'path';
 
 export class Config {

@@ -26,9 +26,6 @@
     "skipLibCheck":false,
     "inlineSourceMap": true
   },
-  "files": [
-    "src/server"
-  ],
   "include": [
     "src/backend/**/*",
   ],
@@ -36,6 +33,5 @@
     "node_modules",
     "build",
     "src/frontend/**/*",
-    "src/FrontEndBundler"
   ]
 }
