@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "jsx": "react",
+    "allowJs": false,
+    "checkJs": false,
+    "declaration": false,
+    "sourceMap": false,
+    "outDir": "./build",
+    "removeComments": false,
+    "strict": false,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "alwaysStrict": true,
+    "noEmitOnError": true,
+    "typeRoots": [
+    ],
+    "allowSyntheticDefaultImports": false,
+    "esModuleInterop": false,
+    "skipLibCheck":false,
+    "inlineSourceMap": true
+  },
+  "files": [
+    "src/server"
+  ],
+  "include": [
+    "src/backend/**/*",
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "src/frontend/**/*",
+    "src/FrontEndBundler"
+  ]
+}
