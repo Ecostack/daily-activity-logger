@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node build/server.js",
     "start-react": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --config webpack.dev.js && tsc",
     "build-prod": "webpack --config webpack.prod.js && tsc",

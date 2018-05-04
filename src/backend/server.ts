@@ -35,7 +35,7 @@ export class Server {
         Server.server.set('view engine', 'pug');
 
         Server.server.use(express.static('../dist'))
-        Server.server.set('views', path.join(__dirname, '/../views'));
+        Server.server.set('views', path.join(__dirname, '/../src/client'));
 
         Server.server.get('/', function (req, res) {
             res.render('index');
