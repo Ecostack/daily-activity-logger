@@ -5,4 +5,4 @@ const TaxonomySchema = new mongoose.Schema({
 	updated_at: { type: Date, default: Date.now },
 });
 
-export const Taxonomy = mongoose.model('Taxonomy', TaxonomySchema);
+export const TaxonomyModel = mongoose.model('Taxonomy', TaxonomySchema);
