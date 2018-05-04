@@ -1,5 +1,7 @@
 const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+var src = path.join(__dirname, 'src');
 
 module.exports = {
   entry: './src/client/index.js',
@@ -9,15 +11,18 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
+      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
+      {
+        test: /\.pug$/,
+        use:  ['html-loader', 'pug-html-loader?pretty&exports=false']
+      }
     ]
   },
   plugins: [
-    new CopyWebpackPlugin([
-      {
-        from: 'src/client/index.html'
-      },
-    ])
+    new HtmlWebpackPlugin({
+      title: 'index.html',
+      template: 'views/index.pug',
+    }),
   ],
   externals: {
     "react": "React",
