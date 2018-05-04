@@ -3,6 +3,8 @@ const server = express();
 
 server.set('view engine', 'pug');
 
+server.use(express.static('dist'))
+
 server.get('/', function (req, res) {
   res.render('index');
 });
