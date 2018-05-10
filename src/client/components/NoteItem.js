@@ -1,15 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import NoteList from "./NoteList";
 
 const Wrapper = styled.main`
   background: pink
 `
 
-const Main = () => (
-  <Wrapper>
-    Main
-  </Wrapper>
-)
+const NoteItem = (props) => {
+	return (
+		<span>{props.text}</span>
+	)
+}
 
-export default Main;
+export default NoteItem;
