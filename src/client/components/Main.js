@@ -6,7 +6,7 @@ const Wrapper = styled.main`
 `
 
 const App = () => (
-  <Wrapper>
+  <Wrapper className="container">
     Main
   </Wrapper>
 )
