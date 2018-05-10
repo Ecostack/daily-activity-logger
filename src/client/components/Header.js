@@ -5,10 +5,10 @@ const Wrapper = styled.header`
   background: pink
 `
 
-const App = () => (
+const Header = () => (
   <Wrapper>
     Header
   </Wrapper>
 )
 
-export default App;
+export default Header;

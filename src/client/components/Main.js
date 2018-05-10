@@ -5,10 +5,10 @@ const Wrapper = styled.main`
   background: pink
 `
 
-const App = () => (
+const Main = () => (
   <Wrapper className="container">
     Main
   </Wrapper>
 )
 
-export default App;
+export default Main;
