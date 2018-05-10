@@ -7,7 +7,7 @@ const Wrapper = styled.main`
 `
 
 const Main = () => (
-  <Wrapper>
+  <Wrapper className="container">
     Main
   </Wrapper>
 )
