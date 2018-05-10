@@ -10,12 +10,12 @@ import * as path from 'path';
 import {PassportService} from "./services/PassportService";
 
 export class Config {
-    static mongo = {
+    public static mongo = {
         hostname:'localhost',
         port: 27017,
         database:'activitylog'
     }
-    static session = {
+    public static session = {
         store: null,
         secret: '1diuiud1iubdiub1',
         cookie: {
@@ -30,10 +30,10 @@ export class Config {
 
 
 export class Server {
-    static port = 3000;
-    static server = null;
+    private static port = 3000;
+    private static server = null;
 
-    static setupDone = false;
+    private static setupDone = false;
 
     public static setup() {
         Server.port = 3000;
@@ -49,7 +49,7 @@ export class Server {
     private static setupFrontend() {
         Server.server.set('view engine', 'pug');
 
-        Server.server.use(express.static('dist'))
+        Server.server.use(express.static(path.join(__dirname, '../dist')));
         Server.server.set('views', path.join(__dirname, '/../src/client'));
 
         Server.server.get('/', function (req, res) {
@@ -59,20 +59,15 @@ export class Server {
 
     private static setupConnections() {
         const MONGODB_CONNECTION: string = "mongodb://" + Config.mongo.hostname + ":" + Config.mongo.port + "/" + Config.mongo.database;
-        // const connection: mongoose.Connection = mongoose.createConnection(MONGODB_CONNECTION);
         mongoose.connect(MONGODB_CONNECTION);
 
-        var MongoStore = connectMongo(session);
+        const MongoStore = connectMongo(session);
 
-        let SessionStore = new MongoStore({
+        const SessionStore = new MongoStore({
             mongooseConnection: mongoose.connection
         });
         global['SessionStore'] = SessionStore;
         Config.session.store = SessionStore;
-        // _.extend(config.session, {
-        //     store: SessionStore
-        //     //store : sessionStore
-        // });
 
         Server.server.use(session(Config.session));
         Server.server.use(passport.initialize());
