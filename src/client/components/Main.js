@@ -9,6 +9,7 @@ const Wrapper = styled.main`
 const Main = () => (
   <Wrapper className="container">
     Main
+      <NoteList/>
   </Wrapper>
 )
 

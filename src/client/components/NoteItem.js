@@ -7,7 +7,7 @@ const Wrapper = styled.main`
 
 const NoteItem = (props) => {
 	return (
-		<span>{props.text}</span>
+		<span>{props.value}</span>
 	)
 }
 
