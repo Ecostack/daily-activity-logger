@@ -1,4 +1,6 @@
 import * as express from 'express';
+import *  as compression from 'compression'
+import *  as  bodyParser from 'body-parser';
 import {UserRoute} from "./routes/UserRoute";
 import * as mongoose from 'mongoose';
 import {NoteRoute} from "./routes/NoteRoute";
@@ -11,9 +13,9 @@ import {PassportService} from "./services/PassportService";
 
 export class Config {
     public static mongo = {
-        hostname:'localhost',
+        hostname: 'localhost',
         port: 27017,
-        database:'activitylog'
+        database: 'activitylog'
     }
     public static session = {
         store: null,
@@ -36,14 +38,18 @@ export class Server {
     private static setupDone = false;
 
     public static setup() {
-        Server.port = 3000;
-        Server.server = express();
-        this.setupConnections();
-        this.setupFrontend();
-        this.routes();
+        if (this.setupDone != true) {
+            Server.port = 3000;
+            Server.server = express();
+            this.setupMiddleware();
+            this.setupConnections();
+            this.setupFrontend();
+            this.routes();
 
-        Server.server.listen(Server.port);
-        console.log(`Server listening at http://localhost:${Server.port}`);
+            Server.server.listen(Server.port);
+            console.log(`Server listening at http://localhost:${Server.port}`);
+            this.setupDone = true;
+        }
     }
 
     private static setupFrontend() {
@@ -55,6 +61,14 @@ export class Server {
         Server.server.get('/', function (req, res) {
             res.render('index');
         });
+    }
+
+    private static setupMiddleware() {
+        Server.server.use(compression());
+        Server.server.use(bodyParser.json());
+        Server.server.use(bodyParser.urlencoded({
+            extended: true
+        }));
     }
 
     private static setupConnections() {

@@ -15,6 +15,19 @@ const UserSchema = new mongoose.Schema({
 	updated_at: { type: Date, default: Date.now },
 });
 
+UserSchema.virtual('id').get(function(){
+    return this._id.toHexString();
+});
+
+UserSchema.set('toJSON', {
+    virtuals: true,
+    transform: function (doc, ret, options) {
+        delete ret._id;
+        delete ret.__v;
+        return ret
+    }
+});
+
 UserSchema.pre('save', function (next) {
     var user = this;
     bcrypt.hash(user.password, 10, function (err, hash){

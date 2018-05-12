@@ -1,9 +1,30 @@
-import {ADD_NOTE} from './../actions/notes'
+import {ADD_NOTE, RECEIVE_NOTES, REQUEST_NOTES} from './../actions/notes'
 
-function notes(state = [], action) {
+function notes(state = {
+				   isFetching: false,
+				   didInvalidate: false,
+				   notes: []
+			   },
+			   action) {
 	switch (action.type) {
 		case ADD_NOTE:
-			return [].concat(state).push({text:action.text})
+			const array = [].concat(state.notes);
+			array.push(action.entity)
+			return Object.assign({}, state, {
+				notes: array
+			})
+		case REQUEST_NOTES:
+			return Object.assign({}, state, {
+				isFetching: true,
+				didInvalidate: false
+			})
+		case RECEIVE_NOTES:
+			return Object.assign({}, state, {
+				isFetching: false,
+				didInvalidate: false,
+				notes: action.notes,
+				lastUpdated: action.receivedAt
+			})
 		default:
 			return state
 	}

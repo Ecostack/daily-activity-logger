@@ -1,18 +1,29 @@
+import thunkMiddleware from 'redux-thunk'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import App from './containers/App';
+import { createLogger } from 'redux-logger';
 import rootReducer from './reducers';
 import {
-  addNote
+	addNote, fetchNotes
 } from './actions/notes';
 
-const store = createStore(rootReducer);
+// if (!global._babelPolyfill) {
+// 	require('babel-polyfill');
+// }
 
-store.dispatch(addNote('Tesstttt'));
+const loggerMiddleware = createLogger();
 
-console.log(store.getState());
+const store = createStore(
+	rootReducer,
+	applyMiddleware(
+		thunkMiddleware, // lets us dispatch() functions
+		loggerMiddleware // neat middleware that logs actions
+	)
+);
+
 
 ReactDOM.render(
   <Provider store={store}>
@@ -20,3 +31,7 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+
+store
+	.dispatch(fetchNotes())
