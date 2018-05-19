@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose';
 import * as bcrypt from 'bcrypt';
+import {UserService} from "../services/UserService";
 
 const UserSchema = new mongoose.Schema({
     email: {
@@ -29,14 +30,14 @@ UserSchema.set('toJSON', {
 });
 
 UserSchema.pre('save', function (next) {
-    var user = this;
-    bcrypt.hash(user.password, 10, function (err, hash){
-        if (err) {
-            return next(err);
-        }
+    try {
+        const user = this;
+        const hash = UserService.generateHash(user.password);
         user.password = hash;
         next();
-    })
+    } catch(err) {
+        next(err);
+    }
 });
 
 export const UserModel = mongoose.model('User', UserSchema);

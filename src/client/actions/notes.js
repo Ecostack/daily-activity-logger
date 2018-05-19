@@ -5,7 +5,7 @@ export const REQUEST_NOTES = "REQUEST_NOTES";
 export const RECEIVE_NOTES = 'RECEIVE_NOTES';
 
 
-function postData(url, data) {
+export function postData(url, data) {
 	return fetch(url, {
 		method: "post",
 		headers: {

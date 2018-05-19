@@ -10,6 +10,7 @@ import * as passport from "passport";
 import {TaxonomyRoute} from "./routes/TaxonomyRoute";
 import * as path from 'path';
 import {PassportService} from "./services/PassportService";
+import {AuthRoute} from "./routes/AuthRoute";
 
 export class Config {
     public static mongo = {
@@ -39,12 +40,11 @@ export class Server {
 
     public static setup() {
         if (this.setupDone != true) {
-            Server.port = 3000;
             Server.server = express();
             this.setupMiddleware();
             this.setupConnections();
-            this.setupFrontend();
             this.routes();
+            this.setupFrontend();
 
             Server.server.listen(Server.port);
             console.log(`Server listening at http://localhost:${Server.port}`);
@@ -58,7 +58,7 @@ export class Server {
         Server.server.use(express.static(path.join(__dirname, '../dist')));
         Server.server.set('views', path.join(__dirname, '/../src/client'));
 
-        Server.server.get('/', function (req, res) {
+        Server.server.get('/*', function (req, res) {
             res.render('index');
         });
     }
@@ -96,6 +96,7 @@ export class Server {
         UserRoute.create(router);
         NoteRoute.create(router);
         TaxonomyRoute.create(router);
+        AuthRoute.create(router);
         this.server.use(`/api`, router);
     }
 }

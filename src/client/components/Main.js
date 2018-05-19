@@ -9,12 +9,11 @@ const Wrapper = styled.main`
 `
 
 const Main = () => (
-  <Wrapper className="container">
-    Main
-      <AddNote/>
-          <VisibleNoteList/>
-      {/*<NoteList/>*/}
-  </Wrapper>
+	<Wrapper className="container">
+		Main
+		<AddNote/>
+		<VisibleNoteList/>
+	</Wrapper>
 )
 
 export default Main;

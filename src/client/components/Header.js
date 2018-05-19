@@ -5,6 +5,7 @@ const Wrapper = styled.header`
   background: pink
 `
 
+
 const Header = () => (
   <Wrapper>
     Header

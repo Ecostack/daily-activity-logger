@@ -32,4 +32,5 @@ let AddNote = ({ dispatch }) => {
 }
 AddNote = connect()(AddNote)
 
+
 export default AddNote
