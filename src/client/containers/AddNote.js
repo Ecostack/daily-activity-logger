@@ -1,7 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {addNote} from "../actions/notes";
+import styled from 'styled-components';
 
+const Input = styled.input`
+  padding: 0.5em;
+  margin: 0.5em;
+  color: palevioletred;
+  background: papayawhip;
+  border: none;
+  border-radius: 3px;
+`;
 
 let AddNote = ({ dispatch }) => {
 	let input;
@@ -18,13 +27,13 @@ let AddNote = ({ dispatch }) => {
 				  input.value = ''
 			  }}
 		  >
-			  <input
+			  <input placeholder="enter new activity @category"
 				  ref={node => {
 					  input = node
 				  }}
 			  />
 			  <button type="submit">
-				  Add Note
+				  add note
 			  </button>
 		  </form>
 	  </div>

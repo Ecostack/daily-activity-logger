@@ -3,13 +3,19 @@ import styled from 'styled-components';
 import NoteItem from "./NoteItem";
 import PropTypes from 'prop-types';
 
+const Bulletless = styled.ul`
+	list-style-type: none;
+	width: 100%;
+	padding: 0 1em 0 1em;
+`;
+
 const NoteList = ({ notes, onTodoClick }) => {
 	return (
-		<ul>
+		<Bulletless>
 			{notes.map((note, index) => (
 				<NoteItem key={index} {...note} onClick={() => onTodoClick(index)} />
 			))}
-		</ul>
+		</Bulletless>
 	)
 }
 
