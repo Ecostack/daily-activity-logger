@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.header`
-  background: pink
+  background: #8a8a92
+  height: 56px;
 `
 
 const Header = () => (
   <Wrapper>
-    Header
+    ACTIVITY-LOGGER
   </Wrapper>
 )
 
-export default Header;
+export default Header;  

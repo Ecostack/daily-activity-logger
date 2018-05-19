@@ -23,7 +23,7 @@ export function addNote(text) {
 	return function (dispatch) {
 		// dispatch(requestNotes());
 
-		return postData('/api/note', {notice: text}).then(result => {
+		return postData(`/api/note`, {notice: text}).then(result => {
 			return dispatch({type: ADD_NOTE, entity: result})
 		})
 	}

@@ -27,11 +27,11 @@
     "inlineSourceMap": true
   },
   "include": [
-    "src/backend/**/*",
+    "src/backend/**/*"
   ],
   "exclude": [
     "node_modules",
     "build",
-    "src/frontend/**/*",
+    "src/frontend/**/*"
   ]
 }
