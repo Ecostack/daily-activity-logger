@@ -7,6 +7,7 @@ const Bulletless = styled.ul`
 	list-style-type: none;
 	width: 100%;
 	padding: 0 1em 0 1em;
+	margin: 0;
 `;
 
 const NoteList = ({ notes, onTodoClick }) => {

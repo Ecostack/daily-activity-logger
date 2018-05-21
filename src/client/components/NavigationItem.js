@@ -5,10 +5,14 @@ import styled from 'styled-components'
 const Button = styled.button`
   border-radius: 3px;
   padding: 0.25em 1em;
-  background: transparent;
-  color: palevioletred;
-  border: 2px solid palevioletred;
+  background: #212529;
+  border: 2px solid #212529;
   width: 100%;
+
+  color: #868e96;
+	&:hover {
+		color: #adb5bd;
+	}
 `;
 
 const ListItem = styled.li`

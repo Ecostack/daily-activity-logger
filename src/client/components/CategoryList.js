@@ -15,8 +15,11 @@ const CategoryList = ({ notes, onCategoryClick }) => {
 			{/*notes.map((note, index) => (
 				<CategoryItem key={index} {...note} onClick={() => onNCategoryClick(index)} />
 			))*/}
-			{<CategoryItem label='Test' onClick={(e) => onCategoryClick('Test')} />}
-			{<CategoryItem label='Test2' onClick={(e) => onCategoryClick('Test2')} />}
+			{<CategoryItem label='@category1' onClick={(e) => onCategoryClick('@category1')} />}
+			{<CategoryItem label='@category2' onClick={(e) => onCategoryClick('@category2')} />}
+			{<CategoryItem label='@home' onClick={(e) => onCategoryClick('@home')} />}
+			{<CategoryItem label='@work' onClick={(e) => onCategoryClick('@work')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
 		</Bulletless>
 	)
 }

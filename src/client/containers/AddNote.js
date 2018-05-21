@@ -4,38 +4,54 @@ import {addNote} from "../actions/notes";
 import styled from 'styled-components';
 
 const Input = styled.input`
-  padding: 0.5em;
-  margin: 0.5em;
-  color: palevioletred;
-  background: papayawhip;
-  border: none;
+	background: white;
+	color: #212529;
+	padding: 0.25em 1em;
+	margin-right: 0.5em;
+	border: none;
+	border-radius: 3px;
+`;
+
+const Button = styled.button`
   border-radius: 3px;
+  padding: 0.25em 1em;
+  background: #212529;
+  border: 2px solid #212529;
+
+  color: #868e96;
+	&:hover {
+		color: #adb5bd;
+	}
+`;
+
+const Form = styled.form`
+	margin: 0;
 `;
 
 let AddNote = ({ dispatch }) => {
-	let input;
+	let inputVal;
 
   return (
 	  <div>
-		  <form
+		  <Form
 			  onSubmit={e => {
 				  e.preventDefault()
-				  if (!input.value.trim()) {
+				  if (!inputVal.value.trim()) {
 					  return
 				  }
-				  dispatch(addNote(input.value))
-				  input.value = ''
+				  dispatch(addNote(inputVal.value))
+				  inputVal.value = ''
 			  }}
 		  >
-			  <input placeholder="enter new activity @category"
-				  ref={node => {
-					  input = node
+			  <Input placeholder="enter new activity @category"
+				  innerRef={node => {
+					  inputVal = node
 				  }}
 			  />
-			  <button type="submit">
+			  <Button type="submit">
 				  add note
-			  </button>
-		  </form>
+			  </Button>
+		  </Form>
 	  </div>
   )
 }

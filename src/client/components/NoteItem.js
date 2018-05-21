@@ -5,8 +5,12 @@ import styled from 'styled-components';
 const ListItem = styled.li`
 text-decoration: none;
 margin: 1px;
-background: #ababab;
 width: 100%;
+
+  background: #adb5bd;
+  &:hover {
+	background: #868e96;
+  }
 `;
 
 const NoteItem = ({ onClick, completed, notice }) => (
