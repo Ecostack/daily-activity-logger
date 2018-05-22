@@ -11,14 +11,12 @@ const Bulletless = styled.ul`
 
 const NavigationList = ({ notes, onNavigationClick }) => {
 	return (
-		<nav>
 		<Bulletless>
 			{<NavigationItem label='All' onClick={() => onNavigationClick('All')} />}
 			{/*notes.map((note, index) => (
 				<NavigationItem key={index} {...note} onClick={() => onNavigationClick(index)} />
 			))*/}
 		</Bulletless>
-		</nav>
 	)
 }
 

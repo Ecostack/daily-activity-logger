@@ -38,6 +38,7 @@ const Navbar = styled.nav`
   width: 256px;
   height: calc(100vh - 56px);
   z-index:1;
+  overflow-x: scroll;
 `;
 
 const Main = () => (

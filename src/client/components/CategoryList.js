@@ -20,6 +20,55 @@ const CategoryList = ({ notes, onCategoryClick }) => {
 			{<CategoryItem label='@home' onClick={(e) => onCategoryClick('@home')} />}
 			{<CategoryItem label='@work' onClick={(e) => onCategoryClick('@work')} />}
 			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
+			{<CategoryItem label='end' onClick={(e) => onCategoryClick('end')} />}
 		</Bulletless>
 	)
 }
