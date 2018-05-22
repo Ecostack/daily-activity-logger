@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import NoteList from "./NoteList";
 import AddNote from "../containers/AddNote";
 import VisibleNoteList from "../containers/VisibleNoteList";
 import VisibleNavigationList from '../containers/VisibleNavigationList';
@@ -12,7 +11,7 @@ const WrapperContent = styled.main`
   margin-left: 256px;
 
   position: relative;
-  min-height: calc(100vh - 56px);
+  min-height: calc(1px); /*We need min-height to get the right position for the sticky filter. Empty content would destroy the layout.*/
   width: calc(100% - 256px);
   box-sizing: border-box;
 `;
@@ -38,7 +37,8 @@ const Navbar = styled.nav`
   width: 256px;
   height: calc(100vh - 56px);
   z-index:1;
-  overflow-x: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const Main = () => (

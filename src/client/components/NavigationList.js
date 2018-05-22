@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import NavigationItem from './NavigationItem';
+import { NAVIGATION_ALL_NOTES } from '../containers/VisibleNavigationList';
 
 const Bulletless = styled.ul`
 	list-style-type: none;
@@ -9,13 +10,12 @@ const Bulletless = styled.ul`
 	padding: 0 1em 0 1em;
 `;
 
-const NavigationList = ({ notes, onNavigationClick }) => {
+const NavigationList = ({ onNavigationClick }) => {
 	return (
 		<Bulletless>
-			{<NavigationItem label='All' onClick={() => onNavigationClick('All')} />}
-			{/*notes.map((note, index) => (
-				<NavigationItem key={index} {...note} onClick={() => onNavigationClick(index)} />
-			))*/}
+			{<NavigationItem label='All' onClick={() => onNavigationClick(NAVIGATION_ALL_NOTES)} />}
+			{<NavigationItem label='unknown' onClick={() => onNavigationClick('unknown')} />}
+			{<NavigationItem label='unknown2' onClick={() => onNavigationClick()} />}
 		</Bulletless>
 	)
 }

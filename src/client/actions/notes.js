@@ -59,3 +59,17 @@ export function fetchNotes() {
 			)
 	}
 }
+
+export function fetchNotesWithCategory(category) {
+	console.log(`fetch notes with category: ` + category);
+	return function (dispatch) {
+		dispatch(requestNotes());
+		return fetch(`/api/note/category/` + category)
+			.then(
+				response => response.json(),
+				error => console.log('An error occurred.', error)
+			)
+			.then(json => dispatch(receivesNotes(json))
+			)
+	}
+}

@@ -9,12 +9,14 @@ const Bulletless = styled.ul`
 	padding: 0 1em 0 1em;
 `;
 
-const CategoryList = ({ notes, onCategoryClick }) => {
+const CategoryList = ({ categories, onCategoryClick }) => {
 	return (
 		<Bulletless>
-			{/*notes.map((note, index) => (
-				<CategoryItem key={index} {...note} onClick={() => onNCategoryClick(index)} />
-			))*/}
+			{categories.map((category, index) => (
+				<CategoryItem key={index} {...category} label={category.category} onClick={() => onCategoryClick(category.category)} />
+			))}
+			{/* navigation-scrollbar test-data
+
 			{<CategoryItem label='@category1' onClick={(e) => onCategoryClick('@category1')} />}
 			{<CategoryItem label='@category2' onClick={(e) => onCategoryClick('@category2')} />}
 			{<CategoryItem label='@home' onClick={(e) => onCategoryClick('@home')} />}
@@ -69,8 +71,17 @@ const CategoryList = ({ notes, onCategoryClick }) => {
 			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
 			{<CategoryItem label='@...' onClick={(e) => onCategoryClick('@...')} />}
 			{<CategoryItem label='end' onClick={(e) => onCategoryClick('end')} />}
+			*/}
 		</Bulletless>
 	)
+}
+
+CategoryList.propTypes = {
+	categories: PropTypes.arrayOf(
+		PropTypes.shape({
+			category: PropTypes.string.isRequired
+		}).isRequired
+	).isRequired
 }
 
 export default CategoryList

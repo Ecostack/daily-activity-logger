@@ -27,5 +27,9 @@ export class NoteRoute {
             res.json(await NoteModel.findByIdAndRemove(mongoose.Types.ObjectId(req.params.id), req.body))
         }));
 
+        router.get(`/${NoteRoute.ROUTER_PREFIX}/category/:category`, RouterHelper.asyncMiddleware(async (req, res, next) => {
+            console.log('get notes for category ' + req.params.category);
+            res.json(await NoteModel.find( {'notice': {'$regex': req.params.category, '$options': 'i' }}));
+        }));
     }
 }

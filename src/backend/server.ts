@@ -11,6 +11,7 @@ import {TaxonomyRoute} from "./routes/TaxonomyRoute";
 import * as path from 'path';
 import {PassportService} from "./services/PassportService";
 import {AuthRoute} from "./routes/AuthRoute";
+import { CategoryRoute } from './routes/CategoryRoute';
 
 export class Config {
     public static mongo = {
@@ -97,6 +98,7 @@ export class Server {
         NoteRoute.create(router);
         TaxonomyRoute.create(router);
         AuthRoute.create(router);
+        CategoryRoute.create(router);
         this.server.use(`/api`, router);
     }
 }

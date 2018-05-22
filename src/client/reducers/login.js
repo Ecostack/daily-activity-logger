@@ -1,5 +1,3 @@
-// import {ADD_NOTE, RECEIVE_NOTES, REQUEST_NOTES} from './../actions/login'
-
 import {LOGIN_FAILURE, LOGIN_SUCCESS, REGISTER_FAILURE, REGISTER_SUCCESS} from "../actions/login";
 
 function login(state = {

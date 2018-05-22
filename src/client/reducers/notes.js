@@ -23,7 +23,7 @@ function notes(state = {
 				isFetching: false,
 				didInvalidate: false,
 				notes: action.notes,
-				lastUpdated: action.receivedAt
+				lastUpdated: action.updated_at
 			})
 		default:
 			return state

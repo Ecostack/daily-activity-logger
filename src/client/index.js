@@ -9,8 +9,12 @@ import rootReducer from './reducers';
 
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import {
-	addNote, fetchNotes
+	addNote, fetchNotes, fetchNotesWithCategory
 } from './actions/notes';
+
+import {
+	fetchCategories
+} from './actions/categories';
 
 const loggerMiddleware = createLogger();
 
@@ -32,5 +36,5 @@ ReactDOM.render(
 );
 
 
-store
-	.dispatch(fetchNotes())
+store.dispatch(fetchNotes());
+store.dispatch(fetchCategories());
