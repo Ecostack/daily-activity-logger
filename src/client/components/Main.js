@@ -41,16 +41,16 @@ const Navbar = styled.nav`
   overflow-x: hidden;
 `;
 
-const Main = () => (
+const Main = (props) => (
   <div>
-    <Navbar>
+    <Navbar location={props.location}>
 		  <VisibleNavigationList/>
 		  <VisibleCategoryList/>
 	  </Navbar>
-    <WrapperFilter>
+    <WrapperFilter location={props.location}>
       <AddNote/>
     </WrapperFilter>
-    <WrapperContent>
+    <WrapperContent location={props.location}>
       <VisibleNoteList/>
     </WrapperContent>
   </div>

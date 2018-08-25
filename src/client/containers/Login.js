@@ -3,9 +3,11 @@ import {connect} from 'react-redux'
 import styled from 'styled-components';
 import Header from './../components/Header';
 import Main from './../components/Main';
+import { withRouter } from 'react-router-dom'
 
 import {Button, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import {loginRequest, registerRequest} from "../actions/login";
+
 
 const WrapperLogin = styled.div`
 @media all and (min-width: 480px) {
@@ -56,12 +58,11 @@ class Login extends React.Component {
 		} else {
 			this.dispatch(loginRequest(this.state));
 		}
-		// this.dispatch(loginRequest(this.state));
 	}
 
 	render() {
 		return (
-			<WrapperLogin>
+			<WrapperLogin location={this.props.location}>
 				<div className="Login">
 					<WrapperLoginForm>
 						<form onSubmit={this.handleSubmit}>
@@ -108,4 +109,4 @@ class Login extends React.Component {
 	}
 }
 
-export default connect()(Login);
+export default withRouter(connect()(Login));

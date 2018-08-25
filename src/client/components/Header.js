@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import LogoutButton from "../containers/LogoutButton";
 
 const Wrapper = styled.header`
   background: #343a40;
@@ -17,10 +18,13 @@ const Wrapper = styled.header`
 `
 
 
-const Header = () => (
-  <Wrapper>
-    ACTIVITY-LOGGER
-  </Wrapper>
+const Header = (props) => (
+    <Wrapper>
+        <div>
+            ACTIVITY-LOGGER
+        </div>
+        <LogoutButton/>
+    </Wrapper>
 )
 
 export default Header;  
