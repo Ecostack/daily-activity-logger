@@ -1,17 +1,18 @@
-import {UserRoute} from "./UserRoute";
 import {RouterHelper} from "./RouterHelper";
 import {UserModel} from "../models/UserModel";
 import {isNotAuthenticated} from "../policies/isNotAuthenticated";
 import {NextFunction} from "express";
 import * as passport from "passport";
-import {isAuthenticated} from "../policies/isAuthenticated";
+import * as jwt from 'jsonwebtoken';
+import {Config} from "../server";
+import {isAuthenticatedJWT} from "../policies/isAuthenticatedJWT";
 
 export class AuthRoute {
     private static ROUTER_PREFIX = 'auth';
 
     public static create(router) {
         // GET /logout
-        router.get(`/${AuthRoute.ROUTER_PREFIX}/logout`, function (req, res, next) {
+        router.get(`/${AuthRoute.ROUTER_PREFIX}/logout`, isAuthenticatedJWT, function (req, res, next) {
             if (req.session) {
                 // delete session object
                 req.session.destroy(function (err) {
@@ -24,8 +25,8 @@ export class AuthRoute {
             }
         });
 
-        router.get(`/${AuthRoute.ROUTER_PREFIX}/loggedin`, isAuthenticated, (req: any, res: any, next: NextFunction) => {
-            res.ok();
+        router.get(`/${AuthRoute.ROUTER_PREFIX}/loggedin`, isAuthenticatedJWT, (req: any, res: any, next: NextFunction) => {
+            res.send(req.user);
         });
 
         router.post(`/${AuthRoute.ROUTER_PREFIX}/login`, isNotAuthenticated, (req: any, res: any, next: NextFunction) => {
@@ -33,7 +34,7 @@ export class AuthRoute {
                 return res.status(400).send({success: false});
             req.body.username = req.body.email;
 
-            passport.authenticate('local', (err, user, info) => {
+            passport.authenticate('local', {session: false}, (err, user, info) => {
                 if (err) {
                     return next(err);
                 }
@@ -43,15 +44,11 @@ export class AuthRoute {
                     if (err || !user) {
                         return next(err);
                     }
-                    req.session.regenerate(function (err) {
-                        Object.assign(req.session, {
-                            authenticated: true,
-                            user: {id: user.id}
-                        })
-                        console.log(req.session);
-                        res.json(user)
-                        // return res.redirect('/');
-                    })
+
+                    const returnUser = {id: user.id};
+
+                    const token = jwt.sign(returnUser, Config.JWT_TOKEN_SECRET);
+                    return res.json({user: returnUser, token});
                 });
             })(req, res, next);
         });
@@ -69,16 +66,12 @@ export class AuthRoute {
                     password: req.body.password,
                 };
                 const user = await UserModel.create(userData);
-                return req.session.regenerate(function (err) {
-                    Object.assign(req.session, {
-                        authenticated: true,
-                        user: {id: user.id}
-                    })
-                    console.log(req.session);
-                    res.json(user);
-                })
 
-                // return res.json(await UserModel.create(userData))
+
+                const returnUser = {id: user.id};
+
+                const token = jwt.sign(returnUser, Config.JWT_TOKEN_SECRET);
+                return res.json({user: returnUser, token});
             }
             throw new Error('Error creating user.');
         }));

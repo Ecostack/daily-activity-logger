@@ -2,39 +2,41 @@ import thunkMiddleware from 'redux-thunk'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import App from './containers/App';
 import {createLogger} from 'redux-logger';
 import rootReducer from './reducers';
 
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
-import {
-	addNote, fetchNotes, fetchNotesWithCategory
-} from './actions/notes';
+import {BrowserRouter as Router} from "react-router-dom";
+import {checkLoggedIn} from "./actions/login";
 
-import {
-	fetchCategories
-} from './actions/categories';
+import {createBrowserHistory} from 'history'
+import {ConnectedRouter, connectRouter, routerMiddleware} from 'connected-react-router'
+
+const history = createBrowserHistory();
 
 const loggerMiddleware = createLogger();
 
 const store = createStore(
-	rootReducer,
-	applyMiddleware(
-		thunkMiddleware,
-		loggerMiddleware
-	)
+    connectRouter(history)(rootReducer),
+    // rootReducer,
+    applyMiddleware(
+        routerMiddleware(history),
+        thunkMiddleware,
+        loggerMiddleware
+    )
 );
 
 
 ReactDOM.render(
-	<Provider store={store}>
-		<Router>
-			<App />
-		</Router>
-	</Provider>, document.getElementById('root')
+    <Provider store={store}>
+        <ConnectedRouter history={history}>
+            <Router>
+                <App/>
+            </Router>
+        </ConnectedRouter>
+    </Provider>, document.getElementById('root')
 );
 
 
-store.dispatch(fetchNotes());
-store.dispatch(fetchCategories());
+store.dispatch(checkLoggedIn());

@@ -11,7 +11,7 @@ import {TaxonomyRoute} from "./routes/TaxonomyRoute";
 import * as path from 'path';
 import {PassportService} from "./services/PassportService";
 import {AuthRoute} from "./routes/AuthRoute";
-import { CategoryRoute } from './routes/CategoryRoute';
+import {CategoryRoute} from './routes/CategoryRoute';
 
 export class Config {
     public static mongo = {
@@ -30,49 +30,55 @@ export class Config {
         resave: false,
         saveUninitialized: false,
     }
+
+    public static JWT_TOKEN_SECRET = 'G78SVamkozCZxug5fsVdrZ2XGPi4NbBKGheBbgSy';
 }
 
 
 export class Server {
-    private static port = 3000;
-    private static server = null;
+    private port = 3000;
+    private server;
 
-    private static setupDone = false;
+    private static instance: Server;
 
-    public static setup() {
-        if (this.setupDone != true) {
-            Server.server = express();
-            this.setupMiddleware();
-            this.setupConnections();
-            this.routes();
-            this.setupFrontend();
-
-            Server.server.listen(Server.port);
-            console.log(`Server listening at http://localhost:${Server.port}`);
-            this.setupDone = true;
+    public static getInstance() {
+        if (Server.instance == null) {
+            this.instance = new Server();
         }
+        return this.instance;
     }
 
-    private static setupFrontend() {
-        Server.server.set('view engine', 'pug');
+    constructor() {
+        this.server = express();
+        this.setupMiddleware();
+        this.setupConnections();
+        this.routes();
+        this.setupFrontend();
 
-        Server.server.use(express.static(path.join(__dirname, '../dist')));
-        Server.server.set('views', path.join(__dirname, '/../src/client'));
+        this.server.listen(this.port);
+        console.log(`Server listening at http://localhost:${this.port}`);
+    }
 
-        Server.server.get('/*', function (req, res) {
+    private setupFrontend() {
+        this.server.set('view engine', 'pug');
+
+        this.server.use(express.static(path.join(__dirname, '../dist')));
+        this.server.set('views', path.join(__dirname, '/../src/client'));
+
+        this.server.get('/*', function (req, res) {
             res.render('index');
         });
     }
 
-    private static setupMiddleware() {
-        Server.server.use(compression());
-        Server.server.use(bodyParser.json());
-        Server.server.use(bodyParser.urlencoded({
+    private setupMiddleware() {
+        this.server.use(compression());
+        this.server.use(bodyParser.json());
+        this.server.use(bodyParser.urlencoded({
             extended: true
         }));
     }
 
-    private static setupConnections() {
+    private setupConnections() {
         const MONGODB_CONNECTION: string = "mongodb://" + Config.mongo.hostname + ":" + Config.mongo.port + "/" + Config.mongo.database;
         mongoose.connect(MONGODB_CONNECTION);
 
@@ -84,15 +90,15 @@ export class Server {
         global['SessionStore'] = SessionStore;
         Config.session.store = SessionStore;
 
-        Server.server.use(session(Config.session));
-        Server.server.use(passport.initialize());
-        Server.server.use(passport.session());
+        this.server.use(session(Config.session));
+        this.server.use(passport.initialize());
+        this.server.use(passport.session());
         PassportService.initiateStrategies(passport);
         global['Passport'] = passport;
 
     }
 
-    private static routes() {
+    private routes() {
         const router = express.Router();
         UserRoute.create(router);
         NoteRoute.create(router);
@@ -103,6 +109,5 @@ export class Server {
     }
 }
 
-Server.setup();
 
-
+Server.getInstance();

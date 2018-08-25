@@ -15,8 +15,15 @@ export function postData(url, data) {
 
 		//make sure to serialize your JSON body
 		body: JSON.stringify(data)
+	}).then(res=> {
+        if (res.status >= 200 && res.status < 300) {
+        	return res
+        } else {
+            const error = new Error(res.statusText || res.status)
+            error.response = res
+            throw error;
+		}
 	}).then(response => response.json())
-
 }
 
 export function addNote(text) {
