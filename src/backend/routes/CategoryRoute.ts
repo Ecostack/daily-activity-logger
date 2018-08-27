@@ -1,12 +1,13 @@
 import {RouterHelper} from "./RouterHelper";
 import {NoteModel} from "../models/NoteModel";
 import * as mongoose from 'mongoose';
+import {isAuthenticatedJWT} from "../policies/isAuthenticatedJWT";
 
 export class CategoryRoute {
     private static ROUTER_PREFIX = 'category';
 
     static create(router) {
-        router.get(`/${CategoryRoute.ROUTER_PREFIX}/`, RouterHelper.asyncMiddleware(async (req, res, next) => {
+        router.get(`/${CategoryRoute.ROUTER_PREFIX}/`, isAuthenticatedJWT, RouterHelper.asyncMiddleware(async (req, res, next) => {
             /*TODO get all notes and extract the categories */
             var categories = [
                 {"category":"@testingBegin"},

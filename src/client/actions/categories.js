@@ -3,21 +3,6 @@ import fetch from 'cross-fetch'
 export const REQUEST_CATEGORIES = "REQUEST_CATEGORIES";
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 
-
-export function postData(url, data) {
-	return fetch(url, {
-		method: "post",
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		},
-
-		//make sure to serialize your JSON body
-		body: JSON.stringify(data)
-	}).then(response => response.json())
-
-}
-
 function requestCategories() {
 	return {
 		type: REQUEST_CATEGORIES,

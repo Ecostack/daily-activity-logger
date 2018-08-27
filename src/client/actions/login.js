@@ -1,11 +1,10 @@
 import fetch from 'cross-fetch'
-import {postData} from "./notes";
+import {postData} from "./actionUtils";
+import {push} from 'connected-react-router'
 
 // import { createBrowserHistory } from 'history';
 //
 // const history = createBrowserHistory();
-
-import { push } from 'connected-react-router'
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -81,7 +80,9 @@ export function checkLoggedIn() {
 export function checkLoggedInWithRequest() {
     return function (dispatch, getState) {
         return fetch(`/api/auth/loggedin`, {
-            'Authorization': 'Bearer ' + getState().token,
+            headers: {
+                'Authorization': 'Bearer ' + getState().login.token,
+            }
         }).then(
             response => {
                 dispatch({type: LOGGED_IN_SUCCESS, entity: response.json()});

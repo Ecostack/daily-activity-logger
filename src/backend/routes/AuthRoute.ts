@@ -29,7 +29,7 @@ export class AuthRoute {
             res.send(req.user);
         });
 
-        router.post(`/${AuthRoute.ROUTER_PREFIX}/login`, isNotAuthenticated, (req: any, res: any, next: NextFunction) => {
+        router.post(`/${AuthRoute.ROUTER_PREFIX}/login`, (req: any, res: any, next: NextFunction) => {
             if (!req.body || !req.body.email || !req.body.password)
                 return res.status(400).send({success: false});
             req.body.username = req.body.email;

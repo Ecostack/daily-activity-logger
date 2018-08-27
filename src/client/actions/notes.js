@@ -1,82 +1,47 @@
-import fetch from 'cross-fetch'
+import {getData, postData} from "./actionUtils";
 
 export const ADD_NOTE = 'ADD_NOTE';
 export const REQUEST_NOTES = "REQUEST_NOTES";
 export const RECEIVE_NOTES = 'RECEIVE_NOTES';
 
-
-export function postData(url, data) {
-	return fetch(url, {
-		method: "post",
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		},
-
-		//make sure to serialize your JSON body
-		body: JSON.stringify(data)
-	}).then(res=> {
-        if (res.status >= 200 && res.status < 300) {
-        	return res
-        } else {
-            const error = new Error(res.statusText || res.status)
-            error.response = res
-            throw error;
-		}
-	}).then(response => response.json())
-}
-
 export function addNote(text) {
-	return function (dispatch) {
-		// dispatch(requestNotes());
-
-		return postData(`/api/note`, {notice: text}).then(result => {
-			return dispatch({type: ADD_NOTE, entity: result})
-		})
-	}
+    return function (dispatch, getState) {
+        return postData(`/api/note`, {notice: text}, getState().login.token).then(result => {
+            return dispatch({type: ADD_NOTE, entity: result})
+        })
+    }
 }
 
 function requestNotes() {
-	return {
-		type: REQUEST_NOTES,
-		// from / to?
-	}
+    return {
+        type: REQUEST_NOTES,
+        // from / to?
+    }
 }
 
 export function receivesNotes(json) {
-	// console.log(json);
-	return {
-		type: RECEIVE_NOTES,
-		notes: json,
-		receivedAt: Date.now()
-	}
+    return {
+        type: RECEIVE_NOTES,
+        notes: json,
+        receivedAt: Date.now()
+    }
 }
 
 
 export function fetchNotes() {
-	console.log(`fetch Notes`);
-	return function (dispatch) {
-		dispatch(requestNotes());
-		return fetch(`/api/note`)
-			.then(
-				response => response.json(),
-				error => console.log('An error occurred.', error)
-			)
-			.then(json => dispatch(receivesNotes(json))
-			)
-	}
+    console.log(`fetch Notes`);
+    return function (dispatch, getState) {
+        dispatch(requestNotes());
+        return getData(`/api/note`, getState().login.token)
+            .then(json => dispatch(receivesNotes(json)))
+    }
 }
 
 export function fetchNotesWithCategory(category) {
-	console.log(`fetch notes with category: ` + category);
-	return function (dispatch) {
-		dispatch(requestNotes());
-		return fetch(`/api/note/category/` + category)
-			.then(
-				response => response.json(),
-				error => console.log('An error occurred.', error)
-			)
-			.then(json => dispatch(receivesNotes(json))
-			)
-	}
+    console.log(`fetch notes with category: ` + category);
+    return function (dispatch, getState) {
+        dispatch(requestNotes());
+        return getData(`/api/note/category/${category}`, getState().login.token)
+            .then(json => dispatch(receivesNotes(json)))
+    }
 }
